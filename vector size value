@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+
+    std::vector<int> vec = {10, 20, 30, 40, 50};
+    size_t size = vec.size();
+    size_t capacity = vec.capacity();
+    std::cout << "Vector elements: ";
+    for (const int& value : vec) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Size of vector: " << size << std::endl;
+    std::cout << "Capacity of vector: " << capacity << std::endl;
+
+    return 0;
+}
+	
