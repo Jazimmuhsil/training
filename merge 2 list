@@ -1,0 +1,44 @@
+#include<iostream>
+#include<vector>
+
+std::vector<int> mergeSortedLists(const std::vector<int>& list1, const std::vector<int>& list2) {
+    std::vector<int> mergedList;
+    int i = 0, j = 0;
+
+    while (i < list1.size() && j < list2.size()) {
+        if (list1[i] < list2[j]) {
+            mergedList.push_back(list1[i]);
+            i++;
+        } else {
+            mergedList.push_back(list2[j]);
+            j++;
+        }
+    }
+
+    while (i < list1.size()) {
+        mergedList.push_back(list1[i]);
+        i++;
+    }
+
+    while (j < list2.size()) {
+        mergedList.push_back(list2[j]);
+        j++;
+    }
+
+    return mergedList;
+}
+
+int main() {
+    std::vector<int> list1 = {5, 6, 7};
+    std::vector<int> list2 = {1, 4, 9};
+
+    std::vector<int> merged = mergeSortedLists(list1, list2);
+
+    std::cout << "Merged List: ";
+    for (int num : merged) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
