@@ -1,0 +1,73 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+class TextEditor {
+private:
+    std::string text; 
+    std::stack<std::string> undoStack; 
+    std::stack<std::string> redoStack; 
+
+public:
+    
+    void performAction(const std::string& action) {
+        
+        undoStack.push(text);
+    
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
+        
+        text = action;
+        std::cout << "Current text: " << text << std::endl;
+    }
+
+    
+    void undo() {
+        if (!undoStack.empty()) {
+
+            redoStack.push(text);
+            
+            text = undoStack.top();
+            undoStack.pop();
+            std::cout << "Undo performed. Current text: " << text << std::endl;
+        } else {
+            std::cout << "Nothing to undo." << std::endl;
+        }
+    }
+
+    
+    void redo() {
+        if (!redoStack.empty()) {
+            
+            undoStack.push(text);
+            
+            text = redoStack.top();
+            redoStack.pop();
+            std::cout << "Redo performed. Current text: " << text << std::endl;
+        } else {
+            std::cout << "Nothing to redo." << std::endl;
+        }
+    }
+
+    
+    void display() const {
+        std::cout << "Current text: " << text << std::endl;
+    }
+};
+
+int main() {
+    TextEditor editor;
+
+    
+    editor.performAction("i am jazim ");
+    editor.performAction("jazim, muhsil!");
+    editor.undo();
+    editor.redo();
+    editor.undo();
+    editor.undo();
+    editor.redo();
+    editor.redo();
+
+    return 0;
+}
