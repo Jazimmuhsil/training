@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class PlateStack {
+private:
+    vector<string> stack;
+
+public:
+
+    void push(string plate) {
+        stack.push_back(plate);
+       cout << "Added plate: " << plate << endl;
+    }
+
+    string pop() {
+        if (isEmpty()) {
+            throw out_of_range("No plates left to remove.");
+        }
+        string topPlate = stack.back();
+        stack.pop_back();
+        return topPlate;
+    }
+    string peek() const {
+        if (isEmpty()) {
+            throw out_of_range("No plates left to peek.");
+        }
+        return stack.back();
+    }
+    bool isEmpty() const {
+        return stack.empty();
+    }
+};
+int main() {
+    PlateStack plateStack;
+
+    plateStack.push("Plate 1");
+    plateStack.push("Plate 2");
+    plateStack.push("Plate 3");
+
+   cout << "Top plate: " << plateStack.peek() << endl;
+   cout << "Removing top plate: " << plateStack.pop() << endl;
+    cout << "Top plate after removal: " << plateStack.peek() <<endl;
+    cout << "Removing all plates..." << endl;
+    plateStack.pop();
+    plateStack.pop();
+
+    if (plateStack.isEmpty()) {
+        cout << "No plates left in the stack." << endl;
+    }
+    return 0;
+}
